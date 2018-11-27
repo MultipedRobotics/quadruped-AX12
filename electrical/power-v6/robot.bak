@@ -26,7 +26,7 @@ F 3 "" H 7400 2500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:PWR_FLAG #FLG01
+L robot-rescue:PWR_FLAG-power #FLG01
 U 1 1 5A7F9C06
 P 2150 7050
 F 0 "#FLG01" H 2150 7125 50  0001 C CNN
@@ -37,7 +37,7 @@ F 3 "" H 2150 7050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:PWR_FLAG #FLG02
+L robot-rescue:PWR_FLAG-power #FLG02
 U 1 1 5A935890
 P 1500 7150
 F 0 "#FLG02" H 1500 7225 50  0001 C CNN
@@ -48,7 +48,7 @@ F 3 "" H 1500 7150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L power:+12V #PWR03
+L robot-rescue:+12V-power #PWR03
 U 1 1 5AA56F03
 P 1500 7050
 F 0 "#PWR03" H 1500 6900 50  0001 C CNN
@@ -59,7 +59,7 @@ F 3 "" H 1500 7050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR04
+L robot-rescue:GND-power #PWR04
 U 1 1 5AA58E71
 P 2150 7150
 F 0 "#PWR04" H 2150 6900 50  0001 C CNN
@@ -142,7 +142,7 @@ F 3 "" H 9550 4650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:LED D1
+L robot-rescue:LED-Device D1
 U 1 1 5ACD24C2
 P 5850 2850
 F 0 "D1" H 5850 2950 50  0000 C CNN
@@ -153,7 +153,7 @@ F 3 "" H 5850 2850 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Device:R R1
+L robot-rescue:R-Device R1
 U 1 1 5ACD2583
 P 5850 3300
 F 0 "R1" V 5930 3300 50  0000 C CNN
@@ -164,7 +164,7 @@ F 3 "" H 5850 3300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR06
+L robot-rescue:GND-power #PWR06
 U 1 1 5ACD2691
 P 5850 3600
 F 0 "#PWR06" H 5850 3350 50  0001 C CNN
@@ -192,7 +192,7 @@ F 3 "" H 9550 2500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR07
+L robot-rescue:GND-power #PWR07
 U 1 1 5ACD2D22
 P 6850 5700
 F 0 "#PWR07" H 6850 5450 50  0001 C CNN
@@ -238,7 +238,7 @@ F 3 "" H 9550 3550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR08
+L robot-rescue:GND-power #PWR08
 U 1 1 5ACD2DD3
 P 9000 5700
 F 0 "#PWR08" H 9000 5450 50  0001 C CNN
@@ -418,7 +418,7 @@ Wire Wire Line
 Wire Wire Line
 	6650 2400 6600 2400
 $Comp
-L Connector:USB_A J5
+L robot-rescue:USB_A-Connector J5
 U 1 1 5BF9F178
 P 5400 4250
 F 0 "J5" H 5455 4717 50  0000 C CNN
@@ -429,7 +429,7 @@ F 3 " ~" H 5550 4200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x05 J6
+L robot-rescue:Conn_01x05-Connector_Generic J6
 U 1 1 5BFA49E0
 P 6200 4900
 F 0 "J6" H 6120 4475 50  0000 C CNN
@@ -448,7 +448,7 @@ Wire Wire Line
 	6850 4900 6850 5150
 NoConn ~ 6400 5100
 $Comp
-L power:GND #PWR0101
+L robot-rescue:GND-power #PWR0101
 U 1 1 5BFB9CA6
 P 5400 4800
 F 0 "#PWR0101" H 5400 4550 50  0001 C CNN
@@ -470,7 +470,7 @@ Wire Wire Line
 NoConn ~ 5700 4250
 NoConn ~ 5700 4350
 $Comp
-L power:+5V #PWR0102
+L robot-rescue:+5V-power #PWR0102
 U 1 1 5BFC6D63
 P 5850 4050
 F 0 "#PWR0102" H 5850 3900 50  0001 C CNN
@@ -481,7 +481,7 @@ F 3 "" H 5850 4050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+5V #PWR0103
+L robot-rescue:+5V-power #PWR0103
 U 1 1 5BFC6E0E
 P 6950 4600
 F 0 "#PWR0103" H 6950 4450 50  0001 C CNN
@@ -492,7 +492,7 @@ F 3 "" H 6950 4600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+5V #PWR0104
+L robot-rescue:+5V-power #PWR0104
 U 1 1 5BFC6E39
 P 6500 4600
 F 0 "#PWR0104" H 6500 4450 50  0001 C CNN
@@ -513,7 +513,7 @@ Wire Wire Line
 Wire Wire Line
 	6950 4700 6950 4600
 $Comp
-L power:+5V #PWR0105
+L robot-rescue:+5V-power #PWR0105
 U 1 1 5BFCCF39
 P 1000 7050
 F 0 "#PWR0105" H 1000 6900 50  0001 C CNN
@@ -524,7 +524,7 @@ F 3 "" H 1000 7050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:PWR_FLAG #FLG0101
+L robot-rescue:PWR_FLAG-power #FLG0101
 U 1 1 5BFCD434
 P 1000 7150
 F 0 "#FLG0101" H 1000 7225 50  0001 C CNN
@@ -544,7 +544,7 @@ Wire Wire Line
 	6700 5000 6400 5000
 Connection ~ 6950 4100
 $Comp
-L Mechanical:MountingHole H1
+L robot-rescue:MountingHole-Mechanical H1
 U 1 1 5BFD2444
 P 8950 700
 F 0 "H1" H 9050 746 50  0000 L CNN
@@ -555,7 +555,7 @@ F 3 "~" H 8950 700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H2
+L robot-rescue:MountingHole-Mechanical H2
 U 1 1 5BFD296E
 P 8950 900
 F 0 "H2" H 9050 946 50  0000 L CNN
@@ -566,7 +566,7 @@ F 3 "~" H 8950 900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H3
+L robot-rescue:MountingHole-Mechanical H3
 U 1 1 5BFD29A2
 P 8950 1100
 F 0 "H3" H 9050 1146 50  0000 L CNN
@@ -577,7 +577,7 @@ F 3 "~" H 8950 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H4
+L robot-rescue:MountingHole-Mechanical H4
 U 1 1 5BFD29D8
 P 8950 1300
 F 0 "H4" H 9050 1346 50  0000 L CNN
@@ -588,7 +588,7 @@ F 3 "~" H 8950 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J4
+L robot-rescue:Conn_01x02-Connector_Generic J4
 U 1 1 5BFB1889
 P 6400 2500
 F 0 "J4" H 6320 2175 50  0000 C CNN
@@ -599,7 +599,7 @@ F 3 "~" H 6400 2500 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J7
+L robot-rescue:Conn_01x02-Connector_Generic J7
 U 1 1 5BFB1BE8
 P 8550 2500
 F 0 "J7" H 8470 2175 50  0000 C CNN
@@ -610,45 +610,45 @@ F 3 "~" H 8550 2500 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J?
+L robot-rescue:Conn_01x02-Connector_Generic J17
 U 1 1 5BFBD4E7
 P 9550 5000
-F 0 "J?" H 9629 4992 50  0000 L CNN
+F 0 "J17" H 9629 4992 50  0000 L CNN
 F 1 "12V" H 9629 4901 50  0000 L CNN
-F 2 "" H 9550 5000 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 9550 5000 50  0001 C CNN
 F 3 "~" H 9550 5000 50  0001 C CNN
 	1    9550 5000
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J?
+L robot-rescue:Conn_01x02-Connector_Generic J18
 U 1 1 5BFBD5C7
 P 9550 5300
-F 0 "J?" H 9629 5292 50  0000 L CNN
+F 0 "J18" H 9629 5292 50  0000 L CNN
 F 1 "12V" H 9629 5201 50  0000 L CNN
-F 2 "" H 9550 5300 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 9550 5300 50  0001 C CNN
 F 3 "~" H 9550 5300 50  0001 C CNN
 	1    9550 5300
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J?
+L robot-rescue:Conn_01x02-Connector_Generic J9
 U 1 1 5BFBD605
 P 7400 5050
-F 0 "J?" H 7479 5042 50  0000 L CNN
+F 0 "J9" H 7479 5042 50  0000 L CNN
 F 1 "5V" H 7479 4951 50  0000 L CNN
-F 2 "" H 7400 5050 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 7400 5050 50  0001 C CNN
 F 3 "~" H 7400 5050 50  0001 C CNN
 	1    7400 5050
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J?
+L robot-rescue:Conn_01x02-Connector_Generic J16
 U 1 1 5BFBD645
 P 7400 5350
-F 0 "J?" H 7479 5342 50  0000 L CNN
+F 0 "J16" H 7479 5342 50  0000 L CNN
 F 1 "5V" H 7479 5251 50  0000 L CNN
-F 2 "" H 7400 5350 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 7400 5350 50  0001 C CNN
 F 3 "~" H 7400 5350 50  0001 C CNN
 	1    7400 5350
 	1    0    0    -1  
