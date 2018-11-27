@@ -16,13 +16,13 @@ Power distribution board just passes the input power to the 16 AX12 servos and t
 
 <img src="pics/5v-buck.jpg" width="300px">
 
-<img src="pics/5v-buck-eff.png" width="100%>
+<img src="pics/5v-buck-eff.png" width="50%">
 
 ### [Pololu 12V Buck Regulator](https://www.pololu.com/product/2885)
 
 <img src="pics/pololu-12v-reg.png" width="300px">
 
-<img src="pics/pololu-12v-reg-eff.png" width="100%>
+<img src="pics/pololu-12v-reg-eff.png" width="50%">
 
 # Bill of Materials (BoM)
 
