@@ -7,9 +7,9 @@
 
 from __future__ import print_function
 from __future__ import division
-from quadruped import Engine
-# from quadruped import DiscreteRippleGait
-from quadruped import Kinematics4
+from multiped import Engine
+# from multiped import DiscreteRippleGait
+from multiped import Kinematics4
 from pyservos import AX12
 import time
 from math import pi
@@ -111,9 +111,10 @@ class RobotTest(object):
         self.currentAngles = dh_angles  # value??
         # where are the feet currently ... (x,y,z)?
         self.currentFeet = {}  # (x,y,z)
-        for i, angles in enumerate(dh_angles):
+        for i, angles in dh_angles.items():
+            # print(angles)
             self.currentFeet[i] = self.kinematics.forward(*angles)
-
+        print("current feet",self.currentFeet)
         self.stand()
 
     def __del__(self):
