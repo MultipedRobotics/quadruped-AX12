@@ -1,38 +1,19 @@
+<img src="pics/spider.jpg" width="100%">
+
 # AX-12A Quadruped
 
-Nature loves animals/insects with legs. Even birds have legs! Legs allow for easier
-navigation across rough terrain. The more legs you have, the more redundant and
-robust you are. If you are a centipede and you break a few legs, no big deal.
-However, if you are a human and break one leg, then walking (forget running)
-becomes extremely difficult.
+Features:
 
-In robotics you see many different types of walking robots. Common ones are:
-2 legs, four legs, and 6 legs. There are advantages and disadvantages for each
-of these types of robots.
+- Robotis AX-12A servos
+- 4 legs
+    - 4 servos per leg for added degrees of freedom
+- Raspberry Pi 3 controlled w/camera
+- Robotis lidar for obstacle avoidance and SLAM
+- 12V power system
+- Externally powered so no limit on run time
+    - A battery could be designed and integrated
 
-- 2 legs
-    - balancing and shifting the body's center of mass is critical to the
-robot not falling over
-    - the 2 legs are generally need to be more powerful to lift the body mass
-- 4 legs:
-    - there is an inherent stability with this configuration. You only need 3
-    legs (tripod) to keep the robot standing, leaving one leg to move freely
-    as needed
-    - each of the legs can be weaker (which also translates into cost $$$) than
-    its 2 legged counter part, but you still have more of them, so it is probably
-    still more expensive
-    - However, there is still a lot of motors, data lines, coordination complexity
-    than if you only had 2 legs
-- 6 legs:
-    - having more than 4 legs contains all of the same advantages/disadvantages
-    of 4 legs
-    - you also have more redundancy, essentially able to loose 2 legs and keep
-    walking
-    - there are also more types of gaits available to you, which is a fancy word
-    for how you control your leg moves when walking, trotting, running, etc
-
-
-
+# Hardware
 
 ![](pics/spider.png)
 
@@ -41,8 +22,13 @@ robot not falling over
 - [Mechanical Hardware](mechanical/)
 - [Electrical Hardware](electrical/)
 
-MIT License
------------
+# Software
+
+Uses [multiped library](https://github.com/MultipedRobotics/multiped/) to control it.
+
+Other SW is TBD until the design is finished
+
+# Software is MIT License
 
 **Copyright (c) 2018 Kevin J. Walchko**
 
@@ -64,3 +50,12 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+<p align="center">
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img alt="Creative Commons License"  src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+    </a>
+    <br />The hardware (mechanical/electrical/documentation) is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+</p>
