@@ -48,7 +48,7 @@ module servo_mnt(){
     translate([25,-60/2,-10]) cube([40,60,20], center=false);
 }
 
-module base(D){
+/* module base(D){
     servo = 35/2+2.25*40/2;
     h=4;
     difference(){
@@ -78,9 +78,9 @@ module base(D){
         rotate([0,0,180])  translate([servo/2-2.5,-32/2,2]) cube([40,32,5], center=false);
         rotate([0,0,270])  translate([servo/2-2.5,-32/2,2]) cube([40,32,5], center=false);
     }
-}
+} */
 
-module top(){
+/* module top(){
 	thick = 4;
     base(135);
     neck = 15;
@@ -88,9 +88,9 @@ module top(){
         translate([0,0,neck/2+thick/2]) cylinder(neck, d2=30, d1=55, center=true);
         translate([0,0,neck/2+thick/2]) cylinder(2*neck,d=20, center=true);
     }
-}
+} */
 
-module bottom(){
+/* module bottom(){
     rotate([180,0,0])  translate([0,0,32]) base(135);
 
     // center grab point
@@ -108,7 +108,7 @@ module bottom(){
     rotate([0,0,135]) translate([.75*135/2-sdia/2,0,-32-h]) cylinder(h, d=sdia);
     rotate([0,0,225]) translate([.75*135/2-sdia/2,0,-32-h]) cylinder(h, d=sdia);
     rotate([0,0,315]) translate([.75*135/2-sdia/2,0,-32-h]) cylinder(h, d=sdia);
-}
+} */
 
 module spar2(){
     // make an unnecessarily fancy shape that mostly gets removed ... replace with simplier solution?
@@ -124,6 +124,9 @@ module spar2(){
 module base_wide2(L, W){
     servo = 35/2+2.25*40/2;
     h=4;
+    /* tiex = 20;
+    tiey = W/2;
+    tiedia = 12; */
     angle = atan2(W/2,L/2);
     echo("angle",angle);
     difference()
@@ -141,11 +144,16 @@ module base_wide2(L, W){
             translate([-shift,0,0]) rotate([0,0,225]) translate([spar_len,0,0]) spar2();
             translate([shift,0,0]) rotate([0,0,315]) translate([spar_len,0,0]) spar2();
 
+            // power cord tiedown
+            //translate([tiex,tiey,0]) cylinder(h, d=tiedia);
+
             // push button
             // translate([32,0,0]) cylinder(10,d=19, center=false);
         }
         // translate([0,0,-1]) cylinder(20,d=20);  // cable hole
-        cube([40,20,60], center=true);  // cable hole
+        //cube([50,20,60], center=true);  // cable hole
+        // power cord tiedown
+        //translate([tiex,tiey,0]) cylinder(4*h, d=tiedia/2, center=true);
 
         // push button
         // translate([32,0,0]) cylinder(40,d=16.5, center=true);
@@ -169,12 +177,22 @@ module base_wide2(L, W){
 } */
 
 module top2(l,w){
+    thick = 4;
+    tiex = 20;
+    tiey = w/2;
+    tiedia = 12;
     difference(){
         union(){
             base_wide2(l, w);
             translate([0,26,0]) powerStandoff(8);
             translate([0,-26,0]) rotate([0,0,180]) powerStandoff(8);
+            // power cord tiedown
+            translate([tiex,tiey,0]) cylinder(thick, d=tiedia);
         }
+        cube([50,20,60], center=true);  // cable hole
+
+        // power cord tiedown
+        translate([tiex,tiey,0]) cylinder(4*thick, d=tiedia/2, center=true);
 
         // stand-offs
         m3 = 3.1;
@@ -191,6 +209,7 @@ module top2(l,w){
         translate([0, 50-5/2-1, -0.5]) cylinder(h=m3h,d=m3d, center=false);
         translate([0, -50+5/2+1, -0.5]) cylinder(h=m3h,d=m3d, center=false);
 
+        // holes for standoffs
         translate([0,26,0]) powerFootPrint();
         translate([0,-26,0]) rotate([0,0,180]) powerFootPrint();
     }
@@ -221,11 +240,22 @@ module bottom2(l,w){
         translate([20,-w/2+10,-32]) cube([15,8,10], center=true);
         translate([-20,-w/2+10,-32]) cube([15,8,10], center=true);
 
+        // power distro board mounting holes
         hbolt = 100;
         translate([22,22,-32])   M3(hbolt);
         translate([-22,22,-32])  M3(hbolt);
         translate([22,-22,-32])  M3(hbolt);
         translate([-22,-22,-32]) M3(hbolt);
+
+        // 5V buck converter
+        box = 30;
+        boy = -8;
+        bodx = 13.5;
+        body = 16;
+        translate([box,boy,-32])   M2(hbolt);
+        translate([box+bodx,boy,-32])  M2(hbolt);
+        translate([box,boy+body,-32])  M2(hbolt);
+        translate([box+bodx,boy+body,-32]) M2(hbolt);
     }
 
     // center grab point

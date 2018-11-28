@@ -423,7 +423,7 @@ U 1 1 5BF9F178
 P 5400 4250
 F 0 "J5" H 5455 4717 50  0000 C CNN
 F 1 "USB_A" H 5455 4626 50  0000 C CNN
-F 2 "Connectors:USB_A" H 5550 4200 50  0001 C CNN
+F 2 "Connector_USB:USB_A_Wuerth_61400826021_Horizontal_Stacked" H 5550 4200 50  0001 C CNN
 F 3 " ~" H 5550 4200 50  0001 C CNN
 	1    5400 4250
 	1    0    0    -1  
@@ -549,7 +549,7 @@ U 1 1 5BFD2444
 P 8950 700
 F 0 "H1" H 9050 746 50  0000 L CNN
 F 1 "MountingHole" H 9050 655 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_2.2mm_M2" H 8950 700 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.5mm" H 8950 700 50  0001 C CNN
 F 3 "~" H 8950 700 50  0001 C CNN
 	1    8950 700 
 	1    0    0    -1  
@@ -560,7 +560,7 @@ U 1 1 5BFD296E
 P 8950 900
 F 0 "H2" H 9050 946 50  0000 L CNN
 F 1 "MountingHole" H 9050 855 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_2.2mm_M2" H 8950 900 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.5mm" H 8950 900 50  0001 C CNN
 F 3 "~" H 8950 900 50  0001 C CNN
 	1    8950 900 
 	1    0    0    -1  
@@ -571,7 +571,7 @@ U 1 1 5BFD29A2
 P 8950 1100
 F 0 "H3" H 9050 1146 50  0000 L CNN
 F 1 "MountingHole" H 9050 1055 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_2.2mm_M2" H 8950 1100 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.5mm" H 8950 1100 50  0001 C CNN
 F 3 "~" H 8950 1100 50  0001 C CNN
 	1    8950 1100
 	1    0    0    -1  
@@ -582,7 +582,7 @@ U 1 1 5BFD29D8
 P 8950 1300
 F 0 "H4" H 9050 1346 50  0000 L CNN
 F 1 "MountingHole" H 9050 1255 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_2.2mm_M2" H 8950 1300 50  0001 C CNN
+F 2 "MountingHole:MountingHole_2.5mm" H 8950 1300 50  0001 C CNN
 F 3 "~" H 8950 1300 50  0001 C CNN
 	1    8950 1300
 	1    0    0    -1  
@@ -593,7 +593,7 @@ U 1 1 5BFB1889
 P 6400 2500
 F 0 "J4" H 6320 2175 50  0000 C CNN
 F 1 "Leg1-2" H 6320 2266 50  0000 C CNN
-F 2 "Wire_Connections_Bridges:WireConnection_2.50mmDrill_LargePad" H 6400 2500 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 6400 2500 50  0001 C CNN
 F 3 "~" H 6400 2500 50  0001 C CNN
 	1    6400 2500
 	-1   0    0    1   
@@ -604,7 +604,7 @@ U 1 1 5BFB1BE8
 P 8550 2500
 F 0 "J7" H 8470 2175 50  0000 C CNN
 F 1 "Leg3-4" H 8470 2266 50  0000 C CNN
-F 2 "Wire_Connections_Bridges:WireConnection_2.50mmDrill_LargePad" H 8550 2500 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 8550 2500 50  0001 C CNN
 F 3 "~" H 8550 2500 50  0001 C CNN
 	1    8550 2500
 	-1   0    0    1   
@@ -693,4 +693,15 @@ Wire Wire Line
 Connection ~ 9000 5400
 Wire Wire Line
 	9000 5400 9000 5700
+$Comp
+L Graphic:Logo_Open_Hardware_Large #LOGO?
+U 1 1 5BFF3E95
+P 8200 1050
+F 0 "#LOGO?" H 8200 1550 50  0001 C CNN
+F 1 "Logo_Open_Hardware_Large" H 8200 650 50  0001 C CNN
+F 2 "Symbol:OSHW-Logo2_24.3x20mm_SilkScreen" H 8200 1050 50  0001 C CNN
+F 3 "~" H 8200 1050 50  0001 C CNN
+	1    8200 1050
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
