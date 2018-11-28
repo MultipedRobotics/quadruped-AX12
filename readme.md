@@ -15,7 +15,7 @@ Features:
 
 # Hardware
 
-![](pics/spider.png)
+<img src="pics/spider.png" width="400px">
 
 **Still under development**
 
