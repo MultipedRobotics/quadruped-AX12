@@ -16,7 +16,7 @@ from math import pi
 import platform
 import sys
 from Gait2 import Discrete
-from plotting import rplot, rplot2, plot_body_frame
+# from plotting import rplot, rplot2, plot_body_frame
 
 """
 need:
