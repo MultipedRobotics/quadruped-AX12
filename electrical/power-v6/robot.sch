@@ -287,11 +287,9 @@ Wire Wire Line
 Connection ~ 9000 3650
 Text Notes 4400 1600 0    60   ~ 0
 AX-12A Quadruped Power Distribution Board\nVersion 5\nNote: the molex pin numbers appear to be in reverse\n--------------------------------\n1 - Data\n2 - 12V\n3 - Ground\n----------------------------\nTrying to keep the current draw around 3A per cable:\nCX-Y: coxa motors for leg X and leg Y\nLegX: tibia, fibia, and tarsus motors for leg X
-Text Notes 4350 1950 0    60   ~ 0
-Power LED
 Text Notes 6350 1900 0    60   ~ 0
 AX-12A Interfaces
-Text Notes 7400 5700 0    60   ~ 0
+Text Notes 7100 6000 0    60   ~ 0
 Data and Power Alternate Interfaces
 $Comp
 L robot-rescue:Conn_01x03 J2
@@ -353,13 +351,9 @@ Wire Wire Line
 	9350 4750 9000 4750
 Connection ~ 9000 4750
 Wire Notes Line
-	6000 4350 10200 4350
+	4750 4350 10200 4350
 Wire Notes Line
-	10200 4350 10200 5550
-Wire Notes Line
-	10200 6100 6000 6100
-Wire Notes Line
-	6000 5550 6000 4350
+	10200 6100 4750 6100
 Wire Wire Line
 	5850 2200 6650 2200
 Wire Wire Line
@@ -418,17 +412,6 @@ Wire Wire Line
 Wire Wire Line
 	6650 2400 6600 2400
 $Comp
-L robot-rescue:USB_A-Connector J5
-U 1 1 5BF9F178
-P 5400 4250
-F 0 "J5" H 5455 4717 50  0000 C CNN
-F 1 "USB_A" H 5455 4626 50  0000 C CNN
-F 2 "Connector_USB:USB_A_Wuerth_61400826021_Horizontal_Stacked" H 5550 4200 50  0001 C CNN
-F 3 " ~" H 5550 4200 50  0001 C CNN
-	1    5400 4250
-	1    0    0    -1  
-$EndComp
-$Comp
 L robot-rescue:Conn_01x05-Connector_Generic J6
 U 1 1 5BFA49E0
 P 6200 4900
@@ -450,34 +433,34 @@ NoConn ~ 6400 5100
 $Comp
 L robot-rescue:GND-power #PWR0101
 U 1 1 5BFB9CA6
-P 5400 4800
-F 0 "#PWR0101" H 5400 4550 50  0001 C CNN
-F 1 "GND" H 5400 4650 50  0000 C CNN
-F 2 "" H 5400 4800 50  0001 C CNN
-F 3 "" H 5400 4800 50  0001 C CNN
-	1    5400 4800
+P 5350 5600
+F 0 "#PWR0101" H 5350 5350 50  0001 C CNN
+F 1 "GND" H 5350 5450 50  0000 C CNN
+F 2 "" H 5350 5600 50  0001 C CNN
+F 3 "" H 5350 5600 50  0001 C CNN
+	1    5350 5600
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5400 4800 5400 4750
+	5350 5600 5350 5550
 Wire Wire Line
-	5300 4650 5300 4750
+	5250 5450 5250 5550
 Wire Wire Line
-	5300 4750 5400 4750
-Connection ~ 5400 4750
+	5250 5550 5350 5550
+Connection ~ 5350 5550
 Wire Wire Line
-	5400 4750 5400 4650
-NoConn ~ 5700 4250
-NoConn ~ 5700 4350
+	5350 5550 5350 5450
+NoConn ~ 5550 5000
+NoConn ~ 5550 5100
 $Comp
 L robot-rescue:+5V-power #PWR0102
 U 1 1 5BFC6D63
-P 5850 4050
-F 0 "#PWR0102" H 5850 3900 50  0001 C CNN
-F 1 "+5V" H 5865 4223 50  0000 C CNN
-F 2 "" H 5850 4050 50  0001 C CNN
-F 3 "" H 5850 4050 50  0001 C CNN
-	1    5850 4050
+P 5650 4750
+F 0 "#PWR0102" H 5650 4600 50  0001 C CNN
+F 1 "+5V" H 5665 4923 50  0000 C CNN
+F 2 "" H 5650 4750 50  0001 C CNN
+F 3 "" H 5650 4750 50  0001 C CNN
+	1    5650 4750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -502,8 +485,6 @@ F 3 "" H 6500 4600 50  0001 C CNN
 	1    6500 4600
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5700 4050 5850 4050
 Wire Wire Line
 	6400 4700 6500 4700
 Wire Wire Line
@@ -704,4 +685,41 @@ F 3 "~" H 8200 1050 50  0001 C CNN
 	1    8200 1050
 	1    0    0    -1  
 $EndComp
+$Comp
+L k-usb:USB_A_2_PORT J5
+U 1 1 5C0205E2
+P 5250 5050
+F 0 "J5" H 5305 5525 50  0000 C CNN
+F 1 "USB_A_2_PORT" H 5305 5434 50  0000 C CNN
+F 2 "Connector_USB:USB_A_Wuerth_61400826021_Horizontal_Stacked" H 5400 5000 50  0001 C CNN
+F 3 " ~" H 5400 5000 50  0001 C CNN
+	1    5250 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 4800 5650 4800
+Wire Wire Line
+	5650 4800 5650 4750
+Wire Wire Line
+	5550 4900 5650 4900
+Wire Wire Line
+	5650 4900 5650 4800
+Connection ~ 5650 4800
+NoConn ~ 5550 5200
+NoConn ~ 5550 5300
+Wire Wire Line
+	5150 5450 5150 5550
+Wire Wire Line
+	5150 5550 5250 5550
+Connection ~ 5250 5550
+Wire Notes Line
+	10200 4350 10200 6100
+Wire Notes Line
+	4750 4350 4750 6100
+Text Notes 4900 5950 0    60   ~ 0
+USB is Power ONLY
+Text Notes 6000 5350 0    60   ~ 0
+Pololu 5V\nBuck Reg
+Text Notes 7500 4750 0    60   ~ 0
+RPi is 5V ONLY
 $EndSCHEMATC
