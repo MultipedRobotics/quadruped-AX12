@@ -62,7 +62,7 @@ Issues:
 class RobotTest(object):
     def __init__(self):
         bcm_pin = None
-        if True:  # manual override for testing - don't actually talk to servos
+        if False:  # manual override for testing - don't actually talk to servos
             ser = 'fake'
         elif platform.system() == 'Darwin':
             ser = '/dev/tty.usbserial-A506BOT5'
@@ -78,19 +78,19 @@ class RobotTest(object):
             # 'femur':  [90, [-90, 90], 123],   # fixme
             # 'tibia':  [89, [-90, 120], 194],  # fixme
             # 'tarsus': [90, [-90, 90], 167],
-            'numLegs': 4,  # helps?
+            'numLegs': 4,          # helps?
             'numServosPerLeg': 4,  # helps?
-            'coxa':   [52, 150],
-            'femur':  [90, 123],   # fixme
-            'tibia':  [89, 194],  # fixme
+            'coxa':   [52, 150],   # length [mm], offset [deg]
+            'femur':  [90, 123],
+            'tibia':  [89, 194],
             'tarsus': [90, 167],
 
-            'sit': (80, 0, 1,),
-            'stand': (120, 0, -70),
+            'sit': (80, 0, 1,),     # foot position [mm]
+            'stand': (120, 0, -70), # foot position [mm]
 
             # engine
             # types: 1:ax12 2:xl320 4:xl430
-            'servoType': 1,
+            'servoType': 1,  # switch to IntFlags
             'serialPort': ser,
             'bcm_pin': bcm_pin
         }
