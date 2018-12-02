@@ -12,7 +12,8 @@ from multiped import Engine
 from multiped import Kinematics4
 from pyservos import AX12
 import time
-from math import pi
+from math import pi, sqrt
+from enum import IntFlag
 import platform
 import sys
 from Gait2 import Discrete
@@ -113,23 +114,38 @@ class RobotTest(object):
         self.currentFeet = {}  # (x,y,z)
         for i, angles in dh_angles.items():
             # print(angles)
-            self.currentFeet[i] = self.kinematics.forward(*angles)
+            self.currentFeet[i] = list(self.kinematics.forward(*angles))
         print("current feet",self.currentFeet)
-        self.stand()
+        self.stand(self.currentFeet)
 
     def __del__(self):
-        self.sit()
+        current = self.getFeetPosition()
+        self.sit(current)
+
+    def getFeetPosition(self):
+        """
+        return {0:(x,y,z), 1:(x,y,z), ...}
+        """
+        dh_angles = self.engine.getCurrentAngles()
+        currentFeet = {}  # (x,y,z)
+        for i, angles in dh_angles.items():
+            # print(angles)
+            currentFeet[i] = list(self.kinematics.forward(*angles))
+        print("current feet",currentFeet)
+        return currentFeet
 
     def walk(self):
         print(" <<<==========  Walk  ==========>>>")
         # predefined walking path
         # x, y, rotation
+        CmdState = IntFlag('CmdState', 'linear rotational neutral')
+        state = CmdState.neutral
         path = [
             [1.0, 0.0, 0],
-            # [1.0, 0, 0],
-            # [1.0, 0, 0],
-            # [1.0, 0, 0],
-            # [1.0, 0, 0],
+            [1.0, 0, 0],
+            [1.0, 0, 0],
+            [1.0, 0, 0],
+            [1.0, 0, 0],
             # [1.0, 0, 0],
             # [1.0, 0, 0],
             # [1.0, 0, 0],
@@ -153,17 +169,30 @@ class RobotTest(object):
             # [-1.0, 0, 0],
         ]
 
+        # cp = self.getFeetPosition()
+        # self.toGait()
+        # return
+
         for cmd in path:
+            # if cmd[2] == 0:
+            #     if state == CmdState.neutral or state == CmdState.rotational:
+            #         self.toGait()
+            #         state = CmdState.linear
+            # else:
+            #     if state == CmdState.linear:
+            #         self.toNeutral()
+            #         state = CmdState.rotational
+
             pts = self.gait.command(cmd)        # get 3d feet points
 
-            # save 3d points
-            for i in pts.keys():
-                self.currentFeet[i] = pts[i][-1]
-
-            # plot_body_frame(pts,1)
-
-            # pts = (x,y,z) for each leg for the whole cycle
-            # speed = max speed seen by any joint, most likely it will be lower
+            # # save 3d points
+            # for i in pts.keys():
+            #     self.currentFeet[i] = pts[i][-1]
+            #
+            # # plot_body_frame(pts,1)
+            #
+            # # pts = (x,y,z) for each leg for the whole cycle
+            # # speed = max speed seen by any joint, most likely it will be lower
             angles_speeds = self.kinematics.generateDHAngles(pts, 200)  # get servo angles
 
             # rplot2(angles_speeds[0])
@@ -176,6 +205,8 @@ class RobotTest(object):
 
             self.engine.moveLegsGait4(angles_speeds)  # send commands to servos
 
+        # self.toNeutral()
+
     def step(self, leg, p1, p2, lift):
         """
         Pick the foot up and set it down
@@ -186,7 +217,88 @@ class RobotTest(object):
         """
         pass
 
-    def sit(self, speed=100):
+    def toNeutral(self, speed=100):
+        return
+
+    def toGait(self, speed=100):
+        curr = self.getFeetPosition()
+        # fin = list(self.positions['stand'])
+        fin = {
+            0: self.gait.steps[0],
+            1: self.gait.steps2[0],
+            2: self.gait.steps2[0],
+            3: self.gait.steps[0],
+        }
+        self.shift(curr, fin, speed)
+
+    def shift(self, curr, final, speed):
+        """
+        Puts legs into a sitting position
+        """
+        print(" <<<========== Walk ==========>>> ")
+        # time.sleep(1)
+        # feet = {}
+        # for leg in range(4):
+        #     print('d', self.engine.last_move[leg])  # these are servo angles!!!!
+        #     x,y,z,s = self.engine.last_move[leg]
+        #     feet[leg] = ((x,y,0),(80, 0, 1),)  # foot position in mm
+
+        # pt = ((self.gait.rest[0],0,0,),(80, 0, 1,),)  # foot position in mm
+
+        # find = list(self.positions['stand'])
+        find = final.copy()
+        finu = find.copy()
+        finu[2] = 0
+
+        lift = curr.copy()
+        lift[0][2] = 0
+        lift[1][2] = 0
+        lift[2][2] = 0
+        lift[3][2] = 0
+
+        # feet = {
+        #     0: (lift[0], finu, find,),
+        #     1: (lift[1], finu, find,),
+        #     2: (lift[2], finu, find,),
+        #     3: (lift[3], finu, find,),
+        # }
+        def xyMag(a, b):
+            return sqrt((b[0]-a[0])**2 + (b[1]-a[1])**2)
+
+        def over(a, o):
+            # print('a', a)
+            # print('o', o)
+            t = [0]*3
+            t[0] = a[0] + o[0]
+            t[1] = a[1] + o[1]
+            t[2] = a[2]
+            return t
+
+        off = 20
+        diff = 5
+        offset = {
+            0: ((off,0,), (0,-off,), (-off,0,), (0,off,)),
+            1: ((0,off,), (off,0,), (0,-off,), (-off,0,)),
+            2: ((-off,0,), (0,off,), (off,0,), (0,-off,)),
+            3: ((0,-off,), (-off,0,), (0,off,), (off, 0,))
+        }
+        feet = {0:[], 1:[], 2:[], 3:[]}
+        for leg in range(4):
+            if (diff < xyMag(find[leg], curr[leg])):
+                for ft in range(4):
+                    s = over(curr[leg], offset[leg][ft])
+                    feet[ft].append(s.copy())
+                    s[2] = 0
+                    feet[ft].append(s)
+                    feet[ft].append(finu)
+                    feet[ft].append(find)
+
+        angles_speeds = self.kinematics.generateDHAngles(feet, speed)
+        self.engine.moveLegsGait4(angles_speeds)
+        time.sleep(1)
+
+
+    def sit(self, curr, speed=100):
         """
         Puts legs into a sitting position
         """
@@ -198,17 +310,26 @@ class RobotTest(object):
         #     x,y,z,s = self.engine.last_move[leg]
         #     feet[leg] = ((x,y,0),(80, 0, 1),)  # foot position in mm
 
-        pt = ((self.gait.rest[0],0,0,),(80, 0, 1,),)  # foot position in mm
+        # pt = ((self.gait.rest[0],0,0,),(80, 0, 1,),)  # foot position in mm
+
+        fin = self.positions['sit']
+
+        curr[0][2] = 0
+        curr[1][2] = 0
+        curr[2][2] = 0
+        curr[3][2] = 0
+
         feet = {
-            0: pt,
-            1: pt,
-            2: pt,
-            3: pt,
+            0: (curr[0], fin,),
+            1: (curr[1], fin,),
+            2: (curr[2], fin,),
+            3: (curr[3], fin,),
         }
         angles_speeds = self.kinematics.generateDHAngles(feet, speed)
         self.engine.moveLegsGait4(angles_speeds)
+        time.sleep(2)
 
-    def stand(self, speed=100):
+    def stand(self, curr, speed=100):
         """
         Puts legs into a standing position
         """
@@ -228,16 +349,22 @@ class RobotTest(object):
         # self.engine.moveLegsGait3(feet)
         # time.sleep(1)
         # pt = ((130, 0, -70),)  # foot position in mm
-        pt = (self.gait.rest,)
+        # pt = (self.gait.rest,)
+        fin = self.positions['stand']
+
+        curr[0][2] = 0
+        curr[1][2] = 0
+        curr[2][2] = 0
+        curr[3][2] = 0
         feet = {
-            0: pt,
-            1: pt,
-            2: pt,
-            3: pt,
+            0: (curr[0], fin,),
+            1: (curr[1], fin,),
+            2: (curr[2], fin,),
+            3: (curr[3], fin,),
         }
         angles_speeds = self.kinematics.generateDHAngles(feet, speed)
         self.engine.moveLegsGait4(angles_speeds)
-        time.sleep(1)
+        time.sleep(2)
 
 
     # def pose_pt(self, leg, pt, speed):

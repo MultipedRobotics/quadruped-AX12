@@ -81,8 +81,10 @@ if __name__ == "__main__":
     if ok:
         servos = OrderedDict(servos)
 
-        print('-[Servos 0-300 deg]---------------------------')
-        for k, v in servos.items():
-            print(" {:.<10} {:5.1f} deg".format(k,v))
+        # print('-[Servos 0-300 deg]---------------------------')
+        for i, (k, v) in enumerate(servos.items()):
+            if i in [0,4,8,12]:
+                print("==[ Leg {:.0f} ]------------------".format(i/4))
+            print("  {:.<10} {:5.1f} deg".format(k,v))
     else:
         print('No servos found')
