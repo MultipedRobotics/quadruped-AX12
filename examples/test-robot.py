@@ -17,7 +17,8 @@ from enum import IntFlag
 import platform
 import sys
 from Gait2 import Discrete
-# from plotting import rplot, rplot2, plot_body_frame
+from plotting import rplot, rplot2, plot_body_frame
+from pprint import pprint
 
 """
 need:
@@ -63,7 +64,7 @@ Issues:
 class RobotTest(object):
     def __init__(self):
         bcm_pin = None
-        if False:  # manual override for testing - don't actually talk to servos
+        if True:  # manual override for testing - don't actually talk to servos
             ser = 'fake'
         elif platform.system() == 'Darwin':
             ser = '/dev/tty.usbserial-A506BOT5'
@@ -142,10 +143,10 @@ class RobotTest(object):
         state = CmdState.neutral
         path = [
             [1.0, 0.0, 0],
-            [1.0, 0, 0],
-            [1.0, 0, 0],
-            [1.0, 0, 0],
-            [1.0, 0, 0],
+            # [1.0, 0, 0],
+            # [1.0, 0, 0],
+            # [1.0, 0, 0],
+            # [1.0, 0, 0],
             # [1.0, 0, 0],
             # [1.0, 0, 0],
             # [1.0, 0, 0],
@@ -170,8 +171,8 @@ class RobotTest(object):
         ]
 
         # cp = self.getFeetPosition()
-        # self.toGait()
-        # return
+        self.toGait()
+        return
 
         for cmd in path:
             # if cmd[2] == 0:
@@ -189,7 +190,7 @@ class RobotTest(object):
             # for i in pts.keys():
             #     self.currentFeet[i] = pts[i][-1]
             #
-            # # plot_body_frame(pts,1)
+            plot_body_frame(pts,1)
             #
             # # pts = (x,y,z) for each leg for the whole cycle
             # # speed = max speed seen by any joint, most likely it will be lower
@@ -229,7 +230,27 @@ class RobotTest(object):
             2: self.gait.steps2[0],
             3: self.gait.steps[0],
         }
-        self.shift(curr, fin, speed)
+        # self.shift(curr, fin, speed)
+
+        steps = {0:[],1:[],2:[],3:[]}
+        for leg in range(4):
+            steps[leg].append(curr[leg])
+        for leg in range(4):
+            c = steps[leg][0].copy()
+            c[2] = 0
+            steps[leg].append(c)
+            f = list(fin[leg])
+            f[2] = 0
+            steps[leg].append(f)
+            steps[leg].append(fin[leg])
+
+        pprint('steps', steps)
+
+        plot_body_frame(steps,1)
+
+        angles_speeds = self.kinematics.generateDHAngles(steps, speed)
+        self.engine.moveLegsGait4(angles_speeds)
+        time.sleep(1)
 
     def shift(self, curr, final, speed):
         """
