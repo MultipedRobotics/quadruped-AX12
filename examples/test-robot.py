@@ -117,11 +117,11 @@ class RobotTest(object):
             # print(angles)
             self.currentFeet[i] = list(self.kinematics.forward(*angles))
         print("current feet",self.currentFeet)
-        self.stand(self.currentFeet)
+        # self.stand(self.currentFeet)
 
     def __del__(self):
         current = self.getFeetPosition()
-        self.sit(current)
+        # self.sit(current)
 
     def getFeetPosition(self):
         """
@@ -190,7 +190,7 @@ class RobotTest(object):
             # for i in pts.keys():
             #     self.currentFeet[i] = pts[i][-1]
             #
-            plot_body_frame(pts,1)
+            # plot_body_frame(pts,1)
             #
             # # pts = (x,y,z) for each leg for the whole cycle
             # # speed = max speed seen by any joint, most likely it will be lower
@@ -221,8 +221,37 @@ class RobotTest(object):
     def toNeutral(self, speed=100):
         return
 
+    def liftOne(self, moveleg, curr, fin):
+        steps = {0:[],1:[],2:[],3:[]}
+        # for leg in range(4):
+        #     steps[leg].append(cu[leg])
+
+        for leg in range(4):
+            if leg == moveleg:
+                # current position
+                steps[leg].append(curr[leg])
+
+                # lift curr
+                c = curr[leg].copy()
+                c[2] = 0
+                steps[leg].append(c)
+
+                # lift final
+                f = list(fin[leg])
+                f[2] = 0
+                steps[leg].append(f)
+
+                # final
+                steps[leg].append(list(fin[leg]))
+            else:
+                for _ in range(4):
+                    steps[leg].append(curr[leg].copy())
+        return steps
+
     def toGait(self, speed=100):
+        print("======= toGait ========================")
         curr = self.getFeetPosition()
+        print(curr)
         # fin = list(self.positions['stand'])
         fin = {
             0: self.gait.steps[0],
@@ -230,27 +259,44 @@ class RobotTest(object):
             2: self.gait.steps2[0],
             3: self.gait.steps[0],
         }
+        print('final',fin)
         # self.shift(curr, fin, speed)
 
-        steps = {0:[],1:[],2:[],3:[]}
-        for leg in range(4):
-            steps[leg].append(curr[leg])
-        for leg in range(4):
-            c = steps[leg][0].copy()
-            c[2] = 0
-            steps[leg].append(c)
-            f = list(fin[leg])
-            f[2] = 0
-            steps[leg].append(f)
-            steps[leg].append(fin[leg])
+        # steps = {0:[],1:[],2:[],3:[]}
+        # for leg in range(4):
+        #     steps[leg].append(curr[leg])
 
-        pprint('steps', steps)
+        for leg in range(4):
+            steps = self.liftOne(leg,curr, fin)
+            # plot_body_frame(steps,1)
+            # angles_speeds = self.kinematics.generateDHAngles(steps, speed)
+            # # current position
+            # steps[leg].append(curr[leg])
+            #
+            # for
+            #
+            # # lift curr
+            # c = curr[leg].copy()
+            # c[2] = 0
+            # steps[leg].append(c)
+            #
+            # # lift final
+            # f = list(fin[leg].copy())
+            # f[2] = 0
+            # steps[leg].append(f)
+            #
+            # # final
+            # steps[leg].append(fin[leg])
 
-        plot_body_frame(steps,1)
+        # print('steps')
+        # pprint(steps)
+        #
+        # plot_body_frame(steps,1)
 
         angles_speeds = self.kinematics.generateDHAngles(steps, speed)
-        self.engine.moveLegsGait4(angles_speeds)
-        time.sleep(1)
+        # self.engine.moveLegsGait4(angles_speeds)
+        # time.sleep(1)
+        print("============== end ==================")
 
     def shift(self, curr, final, speed):
         """
