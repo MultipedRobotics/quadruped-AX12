@@ -64,12 +64,12 @@ I use [OpenSCAD](http://www.openscad.org/) which is a free solid modeler.
 
 | Part | Qnty | Each | Cost |
 |------|------|------|------|
-| AX-12A Servos x6 | 3 | $225  | $675 |
-| 400 S1 (M2) screws | 1 | $5 | $5 |
-| 400 N1 (M2) screws | 1 | $5 | $5 |
-| BIOLOID BU/WA Washer/Bushing x10 | 2 | $8 | $16 |
-| BOILOID 3Pin Cable Set (25) | 1 | $35 | $35 |
-| BIOLOID F2 Servo Bracket x10 | 1 | $7 | $7 |
-| BIOLOID F3 Servo Bracket x10 | 1 | $9 | $9 |
-| PLA for 3d Printing | 1 | $25 | $25 |
-| **Total** | | | $777 |
+| AX-12A Servos x6                 | 3 | $225  | $675 |
+| S1 (M2x6) screws (400 pcs)       | 1 | $5    | $5 |
+| N1 (M2) nuts (400 pcs)           | 1 | $5    | $5 |
+| BIOLOID BU/WA Washer/Bushing x10 | 2 | $8    | $16 |
+| BOILOID 3Pin Cable Set (25)      | 1 | $35   | $35 |
+| BIOLOID F2 Servo Bracket x10     | 1 | $7    | $7 |
+| BIOLOID F3 Servo Bracket x10     | 1 | $9    | $9 |
+| PLA for 3d Printing              | 1 | $25   | $25 |
+| **Total**                        |   |       | $777 |
