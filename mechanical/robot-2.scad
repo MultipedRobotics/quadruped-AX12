@@ -119,22 +119,23 @@ module rpi_base(){
         cylinder(h=4, d=100);
 
         // cable cutouts
+        translate([-12.5,-50,-1]) cube([25,20,20], center=false);
         cube([70,20,20], center=true);
         translate([0,-10,0]) cylinder(h=10, d=50, center=true);
         translate([0,10,0]) cylinder(h=20, d=40, center=true);
 
         // alt imu mount point
-        rotate([0,180,0]) translate([0,0,-4]){
+        /* rotate([0,0,0]) translate([0,0,0]){ */
             y = 5;
-            translate([38, 23+y, 0]) M2(20);
-            translate([38, y, 0]) M2(20);
-        }
+            translate([-38, 23+y, 0]) M2(20);
+            translate([-38, y, 0]) M2(20);
+        /* } */
 
         // screws to bottom (legs)
-        translate([50-5/2-1, 0, 0]) M3(20);
-        translate([-50+5/2+1, 0, 0]) M3(20);
-        translate([0, 50-5/2-1, 0]) M3(20);
-        translate([0, -50+5/2+1, 0]) M3(20);
+        translate([50-5/2-1, 0, 0]) {M3(20);}
+        translate([-50+5/2+1, 0, 0]) {M3(20);}
+        translate([0, 50-5/2-1, 0]) {M3(20);}
+        translate([0, -50+5/2+1, 0]) {M3(20);}
 
         // screws to top (lidar)
         rotate([0,180,45]) translate([0,0,-4]){
@@ -156,7 +157,7 @@ module rpi_base(){
     // pi standoffs
     dx = 58;
     dy = 49;
-    height = 4;  // height above plate
+    /* height = 4;  // height above plate */
     rotate([0,0,90]) translate([-dx/2,-dy/2,0]) {
         M2standoff(dx-10,0,4,height);
         M2standoff(-10,0,4,height);
@@ -164,7 +165,7 @@ module rpi_base(){
         M2standoff(-10,dy,4,height);
     }
 
-    translate([0,-55,0]) cameramount(4);
+    /* translate([0,-55,0]) cameramount(4); */
 }
 
 module lidar_base(){
@@ -279,7 +280,7 @@ module fullrobot(femur_angle, tibia_angle, tarsus_angle){
 
 //fullrobot(10,140,20);  // stand
 //fullrobot(100,160,90);  // stow
-bottom2(140,100);
+//bottom2(140,100);
 
 //top2(140,100);
 //rotate([0,0,90]) translate([2,0,6]) rpi3();
@@ -290,5 +291,5 @@ bottom2(140,100);
 
 //top2(140, 100);
 //upper();
-//rpi_base();
+rpi_base();
 //lidar_base();
