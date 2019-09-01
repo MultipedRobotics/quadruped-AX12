@@ -77,7 +77,7 @@ module piFootPrint(depth=10){
     }
 }
 
-module M2standoff(x,y,z,h){
+/* module M2standoff(x,y,z,h){
     dia = 2.5;
     wide = 3;
 
@@ -85,7 +85,7 @@ module M2standoff(x,y,z,h){
         cylinder(h=h, d=dia+wide);
         cylinder(h=4*h, d=dia, center=true);
     }
-}
+} */
 
 module cameramount(thick){
     offset = 15;
@@ -96,18 +96,37 @@ module cameramount(thick){
         translate([-25/2,-1,-1]) cube([25, 20, 2*thick]); // screw cutout
     }
     // camera mount back
-    difference(){
-        translate([-49/2,0,0])cube([49, 3, 30+offset]);
-        translate([-49/2+3,-1,3+offset]) cube([4, 10, 4]);
-        translate([-49/2+3,-1,3+offset+20]) cube([4, 10, 4]);
-        translate([49/2-7,-1,3+offset]) cube([4, 10, 4]);
-        translate([49/2-7,-1,3+offset+20]) cube([4, 10, 4]);
-        translate([-25/2,-1,-1])cube([25, 10, 25]);  // cable/sd card cutout
+    difference()
+    {
+        translate([-49/2,0,0]) cube([49, 4, 30+offset]);
+
+        translate([-49/2+3+2,-1,3+offset+2]) rotate([90,0,0]){
+            M3(6);
+            translate([0,0,-6]) M3Nut(3);
+        }  // bottom left
+        translate([-49/2+3+2,-1,3+offset+20+2]) rotate([90,0,0]) {
+            M3(6);
+            translate([0,0,-6]) M3Nut(3);
+        }  // top left
+        translate([49/2-7+2,-1,3+offset+2]) rotate([90,0,0]) {
+            M3(6);
+            translate([0,0,-6]) M3Nut(3);
+        } // bottom right
+        translate([49/2-7+2,-1,3+offset+20+2]) rotate([90,0,0]) {
+            M3(6);
+            translate([0,0,-6]) M3Nut(3);
+        } // top right
+
+        translate([0,0,20]) rotate([90,0,0]) {
+            cylinder(h=10, d=25, center=true); // arch
+        }
+
+        translate([-25/2,-1,-1]) cube([25, 10, 20]);  // cable/sd card cutout
     }
     // curved edges
     difference(){
         translate([-49/2,0,4]) cube([49, 8, 5]);
-        translate([-49/2-1,5+3,4+5]) rotate([0,90,0]) cylinder(h=55, d=10);
+        translate([-49/2-1,5+4,4+5]) rotate([0,90,0]) cylinder(h=55, d=10);
         translate([-25/2,-1,-1]) cube([25, 20, 40]); // screw cutout
     }
 }
@@ -125,14 +144,16 @@ module standoff(h,dia){
 }
 
 module rpi_base(){
-    difference(){
+    difference()
+    {
         // main deck
         cylinder(h=4, d=100);
 
         // cable cutouts
-        translate([-12.5,-50,-1]) cube([25,20,20], center=false);
-        cube([70,20,20], center=true);
-        translate([0,-10,0]) cylinder(h=10, d=50, center=true);
+        translate([-12.5,-50,-1]) cube([25,11,20], center=false); // front
+        translate([0,-40,0]) cylinder(h=10, d=25, center=true); // front curve
+        translate([0,-2.55,0]) cube([70,30,20], center=true); // side cable runs
+        /* translate([0,-10,0]) cylinder(h=10, d=50, center=true); */
         translate([0,10,0]) cylinder(h=20, d=40, center=true);
 
         // alt imu mount point
@@ -149,12 +170,12 @@ module rpi_base(){
         translate([0, -50+5/2+1, 0]) {M3(20);}
 
         // screws to top (lidar)
-        /* rotate([0,180,45]) translate([0,0,-4]){
+        rotate([0,180,45]) translate([0,0,-4]){
             rotate([0,0,20]) translate([50-5/2-1, 0, 0]) M3(20);
             translate([-50+5/2+1, 0, 0]) M3(20);
             translate([0, 50-5/2-1, 0]) M3(20);
             rotate([0,0,-20]) translate([0, -50+5/2+1, 0]) M3(20);
-        } */
+        }
 
         /* rotate([0,180,90]) translate([10,0,-4]) piFootPrint(); */
         rotate([0,0,90]) translate([-10,0,0]) piFootPrint();
@@ -180,14 +201,14 @@ module rpi_base(){
     translate([0,-55,0]) cameramount(4);
 
     // standoff to lidar
-    rotate([0,0,-45]) translate([0,0,4]){
+    /* rotate([0,0,-45]) translate([0,0,4]){
         dia = 7;
         h = 25;
         rotate([0,0,20]) translate([50-5/2-1, 0, 0]) standoff(h=h,d=dia);
         translate([-50+5/2+1, 0, 0])  cylinder(h=h,d=dia);
         translate([0, 50-5/2-1, 0])  cylinder(h=h,d=dia);
         rotate([0,0,-20]) translate([0, -50+5/2+1, 0])  cylinder(h=h,d=dia);
-    }
+    } */
 }
 
 module lidar_base(){
@@ -313,6 +334,6 @@ module fullrobot(femur_angle, tibia_angle, tarsus_angle){
 
 //top2(140, 100);
 //upper();
-/* rpi_base(); */
-standoff(35,8);
+rpi_base();
+/* standoff(35,8); */
 //lidar_base();

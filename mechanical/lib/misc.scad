@@ -55,7 +55,7 @@ module M2Nut(t){
 } */
 
 module M2(t){
-    dia = 2.5;
+    dia = 2.2;
     sdia = 6;  // counter sink dia
     cylinder(3*t, d=dia, center=true);  // M2
     /* translate([0,0,2]) cylinder(3*t, d=sdia, center=false);  // screw driver */
@@ -63,7 +63,7 @@ module M2(t){
 }
 
 module M3(t){
-    cylinder(h=3*t, d=3.5, center=true);
+    cylinder(h=3*t, d=3.3, center=true);
     translate([0,0,2]) cylinder(h=3*t, d=7, center=false);
 }
 
