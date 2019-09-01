@@ -62,7 +62,7 @@ module leg(femur_angle, tibia_angle, tarsus_angle,COLOR1,COLOR2){
 }
 
 module piFootPrint(depth=10){
-    hole = 2.8; // mm
+    /* hole = 2.8; // mm */
     dx = 58;
     dy = 49;
     translate([-dx/2,-dy/2,0]){
@@ -113,6 +113,17 @@ module cameramount(thick){
 }
 }
 
+module standoff(h,dia){
+    difference()
+    {
+        cylinder(h=h,d=dia);
+        translate([-5.5/2,-5.5/2,h-5]) {
+            cube([5.5,8,2], center=false);
+        }
+        cylinder(h=h+1,d=3.3);
+    }
+}
+
 module rpi_base(){
     difference(){
         // main deck
@@ -138,18 +149,19 @@ module rpi_base(){
         translate([0, -50+5/2+1, 0]) {M3(20);}
 
         // screws to top (lidar)
-        rotate([0,180,45]) translate([0,0,-4]){
+        /* rotate([0,180,45]) translate([0,0,-4]){
             rotate([0,0,20]) translate([50-5/2-1, 0, 0]) M3(20);
             translate([-50+5/2+1, 0, 0]) M3(20);
             translate([0, 50-5/2-1, 0]) M3(20);
             rotate([0,0,-20]) translate([0, -50+5/2+1, 0]) M3(20);
-        }
+        } */
 
-        rotate([0,180,90]) translate([10,0,-4]) piFootPrint();
+        /* rotate([0,180,90]) translate([10,0,-4]) piFootPrint(); */
+        rotate([0,0,90]) translate([-10,0,0]) piFootPrint();
     }
 
     // imu standoffs
-    height = 4;  // height above plate
+    height = 3;  // height above plate
     y = 5;
     M2standoff(-38,23+y,4,height);
     M2standoff(-38,y,4,height);
@@ -165,7 +177,17 @@ module rpi_base(){
         M2standoff(-10,dy,4,height);
     }
 
-    /* translate([0,-55,0]) cameramount(4); */
+    translate([0,-55,0]) cameramount(4);
+
+    // standoff to lidar
+    rotate([0,0,-45]) translate([0,0,4]){
+        dia = 7;
+        h = 25;
+        rotate([0,0,20]) translate([50-5/2-1, 0, 0]) standoff(h=h,d=dia);
+        translate([-50+5/2+1, 0, 0])  cylinder(h=h,d=dia);
+        translate([0, 50-5/2-1, 0])  cylinder(h=h,d=dia);
+        rotate([0,0,-20]) translate([0, -50+5/2+1, 0])  cylinder(h=h,d=dia);
+    }
 }
 
 module lidar_base(){
@@ -291,5 +313,6 @@ module fullrobot(femur_angle, tibia_angle, tarsus_angle){
 
 //top2(140, 100);
 //upper();
-rpi_base();
+/* rpi_base(); */
+standoff(35,8);
 //lidar_base();
